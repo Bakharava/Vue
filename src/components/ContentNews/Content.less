@@ -13,7 +13,6 @@
       flex-direction: column;
       align-items: flex-start;
       width: 80%;
-
       margin-top: @base-margin * 3;
       &-latest {
         display: flex;
@@ -30,84 +29,11 @@
       }
       .content__news-posts {
         display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
         margin-top: @base-margin * 2;
         min-height: @height-sss * 7;
-        ul {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: flex-start;
-          li {
-            list-style-type: none;
-            div {
-              width: @width-sm;
-              height: @height-sss * 3;
-              display: flex;
-              margin: @base-margin*2 @base-margin*3 @base-margin*2 @base-margin;
-              border: 1px solid @color-additional-dark-bg-grey;
-              a {
-                text-decoration: none;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                img {
-                  width: @width-sm;
-                  flex-basis: 50%;
-                  max-height: 180px;
-                }
-                .news-time {
-                  font-weight: 400;
-                  color: @color-additional-light-blue;
-                  margin-left: @base-margin * 0.5;
-                  flex-basis: 10%;
-                }
-              }
-              textarea {
-                border: none;
-                font-weight: 600;
-                font-size: @font-size-sm;
-                // height: 25%;
-                margin-top: @base-margin;
-                margin-left: @base-margin *0.5;
-                //  flex-basis: 30%;
-                outline: none;
-                cursor: pointer;
-                flex-direction: column;
-                font-family: @font-added;
-                color: @color-extra-black;
-                resize: none;
-              }
-
-            }
-          }
-
-        }
-
-      }
-      .pagination {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-bottom: @base-margin;
-        div {
-          display: flex;
-        }
-        a {
-          width: @base-width * 2.5;
-          height: @base-height * 3;
-          text-decoration: none;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: @color-additional-light-blue;
-          font-size: @font-size-md;
-        }
-        a.active {
-          background-color: @color-additional-light-blue;
-          color: @color-basic-white;
-        }
-        a:hover:not(.active) {
-          background-color: @color-extra-grey;
-        }
       }
     }
     .content__weather {

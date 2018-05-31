@@ -1,0 +1,28 @@
+@import "../../styles/styles";
+
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: @base-margin;
+  div {
+    display: flex;
+  }
+  a {
+    width: @base-width * 2.5;
+    height: @base-height * 3;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: @color-additional-light-blue;
+    font-size: @font-size-md;
+  }
+  a.active {
+    background-color: @color-additional-light-blue;
+    color: @color-basic-white;
+  }
+  a:hover:not(.active) {
+    background-color: @color-extra-grey;
+  }
+}

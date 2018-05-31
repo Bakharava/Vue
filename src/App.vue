@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="main-container">
-      <Header />
-      <Content/>
+      <Header @newsUrlChange="changeNews"/>
+      <Content :newsTypeParam="newsParam"/>
       <Footer/>
     </div>
   </div>
@@ -19,7 +19,18 @@ export default {
       Footer,
       Content,
       Header
-  }
+  },
+    data() {
+      return {
+          newsParam: ''
+      }
+    },
+    methods: {
+      changeNews(newsType) {
+          console.log(newsType)
+          return this.newsParam = newsType
+      }
+    }
 }
 </script>
 

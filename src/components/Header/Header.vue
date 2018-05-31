@@ -3,13 +3,14 @@
         <div class="header">
             <div class="header__link">
                 <div class="header__logo">logo</div>
-                <div class="header__link-news">
+                <div class="header__link-news" >
                     <!--<a class="fa fa-home link-home"></a>-->
-                    <a class="active" id="1">in world</a>
-                    <a id="2">sport</a>
-                    <a id="3">music</a>
-                    <a id="4">business</a>
-                    <!-- <a> blog</a>-->
+                    <a class="type active"
+                       v-for="type in newsType"
+                       :key="type"
+                       @click="getNewsType(type)">
+                        {{type}}
+                    </a>
                 </div>
                 <div class="header__link-social">
                     <form class="search-news" target="_self">
@@ -31,8 +32,16 @@
     export default {
         name: "Header",
         components: {SubHeader},
-        props: {
-            msg: String
+        data() {
+            return{
+                newsType:["in world", "sport", "music", "business"],
+                newsUrl: ''
+            }
+        },
+        methods: {
+            getNewsType(type) {
+                this.$emit('newsUrlChange', type)
+            }
         }
     }
 </script>
