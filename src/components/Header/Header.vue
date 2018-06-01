@@ -34,8 +34,7 @@
         components: {SubHeader},
         data() {
             return{
-                newsType:["in world", "sport", "music", "business"],
-                newsUrl: ''
+                newsType:["in world", "sport", "music", "business"]
             }
         },
         methods: {

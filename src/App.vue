@@ -27,7 +27,6 @@ export default {
     },
     methods: {
       changeNews(newsType) {
-          console.log(newsType)
           return this.newsParam = newsType
       }
     }

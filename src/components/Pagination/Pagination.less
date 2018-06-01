@@ -5,10 +5,10 @@
   display: flex;
   justify-content: center;
   margin-bottom: @base-margin;
-  div {
+ /* div {
     display: flex;
-  }
-  a {
+  }*/
+  &__page {
     width: @base-width * 2.5;
     height: @base-height * 3;
     text-decoration: none;
@@ -17,12 +17,13 @@
     align-items: center;
     color: @color-additional-light-blue;
     font-size: @font-size-md;
+    cursor: pointer;
   }
-  a.active {
+  .active {
     background-color: @color-additional-light-blue;
     color: @color-basic-white;
   }
-  a:hover:not(.active) {
+  &__page:hover:not(.active) {
     background-color: @color-extra-grey;
   }
 }
