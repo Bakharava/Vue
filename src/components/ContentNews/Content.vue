@@ -27,7 +27,8 @@
     import axios from 'axios';
     import NewsCard from "../NewsCard/NewsCard";
     import Pagination from "../Pagination/Pagination";
-    import Loader from "../Loader/Loader"
+    import Loader from "../Loader/Loader";
+    import { EventBus } from "../EventBus";
 
     const apiKey = 'b8d411a4e22745308fab1a665115c094';
     //let searchNewsParam = '';
@@ -35,35 +36,33 @@
     export default {
         name: "Content",
         components: {Pagination, NewsCard, Loader},
-        props: ['newsTypeParam'],
+       // props: ['newsTypeParam'],
         data() {
             return {
                 result: [],
                 allNewsLength: '',
                 loading: true,
-                newsUrlParam: 'sources=bbc-news,the-next-web,the-verge',
-                fff: '',
+                newsUrlParam: 'top-headlines?sources=bbc-news,the-next-web,the-verge',
                 pageNumberParam: 1
-            }
-        },
-        computed: {
-            updateNews() {
-               /* if(this.newsTypeParam !== '' && this.newsTypeParam !== 'in world'){
-                    this.fff = `category=${this.newsTypeParam}`
-                } else {
-                    this.fff = 'sources=bbc-news,the-next-web,the-verge'
-                }*/
-                this.fff = `category=${this.newsTypeParam}`;
-                this.getNews(this.fff);
-                return this.result;
             }
         },
         mounted() {
             this.getNews(this.newsUrlParam);
         },
+        created() {
+            EventBus.$on('newsUrlChange', (type) => {
+                this.pageNumberParam = 1;
+                const param = type === 'in world' ? this.newsUrlParam : `top-headlines?category=${type}`;
+                this.getNews(param);
+            });
+            EventBus.$on('getSearchNews', searchParams => {
+               const param = `everything?q=${searchParams}`;
+                this.getNews(param);
+            })
+        },
         methods: {
             getNews(param) {
-                const newsUrl = `https://newsapi.org/v2/top-headlines?${param}&language=en&pageSize=20&page=${this.pageNumberParam}&apiKey=${apiKey}`;
+                const newsUrl = `https://newsapi.org/v2/${param}&language=en&pageSize=20&page=${this.pageNumberParam}&apiKey=${apiKey}`;
                 axios.get(newsUrl).then(response => {
                     this.loading = false;
                     this.result = response.data.articles;
@@ -76,22 +75,7 @@
                 this.pageNumberParam = page;
                 this.getNews(this.newsUrlParam)
             }
-        },
-   /*     watch:{
-            newsUrlParam: function (newVal) {
-                console.log(newVal)
-                if(newVal) {
-                    let param = newVal
-                    this.getNews(param);
-                }
-            }
-        }*/
-   /*     updated() {
-            this.$nextTick(function () {
-                let param = this.newsTypeParam === 'in world' ? this.newsUrlParam : `category=${this.newsTypeParam}`
-                this.getNews(param);
-            })
-        }*/
+        }
     };
 
 </script>

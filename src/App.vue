@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="main-container">
-      <Header @newsUrlChange="changeNews"/>
-      <Content :newsTypeParam="newsParam"/>
+      <Header />
+      <Content />
       <Footer/>
     </div>
   </div>

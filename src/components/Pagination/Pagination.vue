@@ -1,10 +1,12 @@
 <template>
     <div class="pagination">
+        <a>&laquo;</a>
         <a v-bind:class="['pagination__page', page === isActive? 'active' : '', 'number'+page]"
            :key="page"
-           v-for="page in getPagesAmount"
-            @click="getActivePage(page)"
+           v-for="page in changePagesAmount"
+           @click="getActivePage(page)"
         >{{page}}</a>
+        <a>&raquo;</a>
     </div>
 </template>
 
@@ -15,16 +17,13 @@
         data() {
             return {
                 pages: [],
-                isActive: 1
+                isActive: 1,
+                la: '&laquo'
             }
         },
         computed: {
-            getPagesAmount() {
-                let pagesAmount = Math.ceil(this.allNewsLength / 20);
-                for (let i = 0; i < pagesAmount; i++) {
-                    this.pages.push(i+1)
-                }
-                return this.pages;
+            changePagesAmount() {
+              return  this.getPagesAmount(this.allNewsLength)
             }
         },
         mounted() {
@@ -34,6 +33,14 @@
             getActivePage(page) {
                 this.$emit('activePageChanged', page);
                 this.isActive = page;
+            },
+            getPagesAmount(ammount) {
+                this.pages = [];
+                let pagesAmount = Math.ceil(ammount / 20);
+                for (let i = 0; i < pagesAmount; i++) {
+                    this.pages.push(i+1);
+                }
+                return this.pages;
             }
         }
     }

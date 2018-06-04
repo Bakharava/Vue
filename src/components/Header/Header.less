@@ -19,6 +19,9 @@
       text-transform: uppercase;
       .header__logo {
         flex-basis: 20%;
+        &-img {
+          height: @base-height-md;
+        }
       }
       .header__link-news {
         display: flex;
@@ -41,7 +44,7 @@
           align-items: center;
         }
       }
-      .header__link-social {
+      .header__search {
         flex-basis: 20%;
         display: flex;
         justify-content: flex-end;
@@ -89,8 +92,9 @@
             color: transparent;
           }
         }
-        a {
+        .link-social {
           width: @base-width;
+          height: @base-height;
           margin-left: @base-margin * 3;
           color: @color-basic-white;
           text-decoration: none;

@@ -2,7 +2,9 @@
     <div class="wrapper">
         <div class="header">
             <div class="header__link">
-                <div class="header__logo">logo</div>
+                <div class="header__logo">
+                    <img class="header__logo-img" src="../../assets/image/logo.svg"/>
+                </div>
                 <div class="header__link-news" >
                     <!--<a class="fa fa-home link-home"></a>-->
                     <a class="type active"
@@ -12,14 +14,18 @@
                         {{type}}
                     </a>
                 </div>
-                <div class="header__link-social">
-                    <form class="search-news" target="_self">
-                        <input id="search-news-input" type="search" autocomplete="off">
-                    </form>
-                    <a class="fa fa-twitter" href="https://www.twitter.com/" target="_blank"></a>
-                    <a class="fa fa-pinterest" href="https://www.pinterest.com/" target="_blank"></a>
-                    <a class="fa fa-facebook" href="https://www.facebook.com/" target="_blank"></a>
-                    <a class="fa fa-instagram" href="https://www.instagram.com/" target="_blank"></a>
+                <div class="header__search">
+                    <div class="search-news" target="_self">
+                        <input id="search-news-input"
+                               type="search"
+                               autocomplete="off"
+                               v-model="searchParams"
+                               @change="getSearchNews(searchParams)">
+                    </div>
+                    <a class="link-social fa fa-twitter" href="https://www.twitter.com/" target="_blank"></a>
+                    <a class="link-social fa fa-pinterest" href="https://www.pinterest.com/" target="_blank"></a>
+                    <a class="link-social fa fa-facebook" href="https://www.facebook.com/" target="_blank"></a>
+                    <a class="link-social fa fa-instagram" href="https://www.instagram.com/" target="_blank"></a>
                 </div>
             </div>
         </div>
@@ -28,18 +34,25 @@
 </template>
 
 <script>
+    import '../../assets/fonts/font-awesome/css/font-awesome.css'
     import SubHeader from "./SubHeader/SubHeader";
+    import { EventBus } from "../EventBus";
+
     export default {
         name: "Header",
         components: {SubHeader},
         data() {
             return{
-                newsType:["in world", "sport", "music", "business"]
+                newsType:["in world", "sport", "music", "business"],
+                searchParams: ''
             }
         },
         methods: {
             getNewsType(type) {
-                this.$emit('newsUrlChange', type)
+                EventBus.$emit('newsUrlChange', type)
+            },
+            getSearchNews(searchParams) {
+                EventBus.$emit('getSearchNews', searchParams)
             }
         }
     }
