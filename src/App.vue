@@ -26,9 +26,6 @@ export default {
       }
     },
     methods: {
-      changeNews(newsType) {
-          return this.newsParam = newsType
-      }
     }
 }
 </script>

@@ -9,14 +9,14 @@
                     <NewsCard :key="article.id" v-for="article in result" :article="article"/>
                 </div>
                 <Loader v-if="loading"/>
-                <Pagination :allNewsLength="allNewsLength" @activePageChanged="changePage"/>
+                <Pagination
+                        :allNewsLength="allNewsLength"
+                        :pageSize="pageSize"
+                        @activePageChanged="changePage"/>
             </div>
             <div class="content__additional">
                 <div class="weather-widget">
-                    <!-- weather widget start --><a target="_blank" href="http://www.booked.net/weather/gomel-w631696">
-                    <img src="https://w.bookcdn.com/weather/picture/11_w631696_1_1_ffffff_118_18acb4_999999_ffffff_1_ffffff_999999_0_6.png?scode=124&domid=w209&anc_id=59702"
-                         alt="booked.net"/>
-                </a><!-- weather widget end -->
+                    <Weather />
                 </div>
             </div>
         </div>
@@ -29,13 +29,14 @@
     import Pagination from "../Pagination/Pagination";
     import Loader from "../Loader/Loader";
     import { EventBus } from "../EventBus";
+    import Weather from "../Weather/Weather";
 
     const apiKey = 'b8d411a4e22745308fab1a665115c094';
     //let searchNewsParam = '';
 
     export default {
         name: "Content",
-        components: {Pagination, NewsCard, Loader},
+        components: {Weather, Pagination, NewsCard, Loader},
        // props: ['newsTypeParam'],
         data() {
             return {
@@ -43,7 +44,8 @@
                 allNewsLength: '',
                 loading: true,
                 newsUrlParam: 'top-headlines?sources=bbc-news,the-next-web,the-verge',
-                pageNumberParam: 1
+                pageNumberParam: 1,
+                pageSize: 20
             }
         },
         mounted() {
@@ -52,8 +54,8 @@
         created() {
             EventBus.$on('newsUrlChange', (type) => {
                 this.pageNumberParam = 1;
-                const param = type === 'in world' ? this.newsUrlParam : `top-headlines?category=${type}`;
-                this.getNews(param);
+                this.newsUrlParam = type === 'in world' ? this.newsUrlParam : `top-headlines?category=${type}`;
+                this.getNews(this.newsUrlParam);
             });
             EventBus.$on('getSearchNews', searchParams => {
                const param = `everything?q=${searchParams}`;
@@ -62,7 +64,7 @@
         },
         methods: {
             getNews(param) {
-                const newsUrl = `https://newsapi.org/v2/${param}&language=en&pageSize=20&page=${this.pageNumberParam}&apiKey=${apiKey}`;
+                const newsUrl = `https://newsapi.org/v2/${param}&language=en&pageSize=${this.pageSize}&page=${this.pageNumberParam}&apiKey=${apiKey}`;
                 axios.get(newsUrl).then(response => {
                     this.loading = false;
                     this.result = response.data.articles;

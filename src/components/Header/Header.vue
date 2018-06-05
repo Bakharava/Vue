@@ -7,7 +7,7 @@
                 </div>
                 <div class="header__link-news" >
                     <!--<a class="fa fa-home link-home"></a>-->
-                    <a class="type active"
+                    <a v-bind:class="['type', type === isActive ? 'active' : '']"
                        v-for="type in newsType"
                        :key="type"
                        @click="getNewsType(type)">
@@ -44,15 +44,19 @@
         data() {
             return{
                 newsType:["in world", "sport", "music", "business"],
-                searchParams: ''
+                searchParams: '',
+                isActive: "in world"
             }
         },
         methods: {
             getNewsType(type) {
-                EventBus.$emit('newsUrlChange', type)
+                EventBus.$emit('newsUrlChange', type);
+                this.isActive = type;
+                this.searchParams='';
             },
             getSearchNews(searchParams) {
-                EventBus.$emit('getSearchNews', searchParams)
+                EventBus.$emit('getSearchNews', searchParams);
+                this.isActive = '';
             }
         }
     }
