@@ -1,4 +1,5 @@
 @import "../../styles/styles";
+
 .weather {
   display: flex;
   flex-direction: column;
@@ -6,16 +7,18 @@
   height: @height-sss * 4;
   border: 1px solid @color-extra-light-grey;
   border-radius: 5%;
+  position: relative;
   &__background {
     border-top-left-radius: 5%;
     border-top-right-radius: 5%;
     flex-basis: 75%;
-    .weather__settings {
+    .weather__settings-icon {
       display: flex;
       margin: @base-margin * 2 ;
       justify-content: flex-end;
       color: @color-basic-white;
       opacity: 0.7;
+      cursor: pointer;
     }
     .weather__city {
       display: flex;
@@ -39,6 +42,9 @@
       font-size: @font-size-xxl;
       color: @color-basic-white;
       margin: @base-margin * 2 ;
+      i {
+        color: blue;
+      }
 
     }
     .weather__date {
@@ -47,6 +53,17 @@
       color: @color-basic-medium-gray;
       margin: @base-margin * 1.5 ;
       font-size: @font-size-xs;
+    }
+    .weather__wind{
+      display: flex;
+      justify-content: flex-end;
+      color: @color-basic-white;
+      margin: @base-margin * 1.5 ;
+      align-items: center;
+      font-size: @font-size-md;
+      &-icon {
+        margin-right: @base-margin * 0.5;
+      }
     }
   }
   &__temperature {
@@ -68,14 +85,26 @@
       color: @color-basic-grey;
       flex-basis: 50%;
     }
+    .weather__fiveDays {
+      display: flex;
+      flex-basis: 50%;
+      align-items: center;
+      color: @color-basic-grey;
+      font-size: @font-size-ss;
+      .day {
+        flex-basis: 20%;
+       margin-left: 2%;
+
+      }
+    }
   }
   .morning {
-    background: linear-gradient(to top, #d2eefb 30%, #72cdf9 70%);
+    background: linear-gradient(to top, @color-additional-light-blue 30%, @color-additional-blue 70%);
   }
   .afternoon {
-    background: linear-gradient(to top, @color-additional-yellow 30%, @color-basic-raspberry 70%);
+    background: linear-gradient(to top, @color-additional-yellow 20%, @color-basic-raspberry 80%);
   }
   .night {
-    background: linear-gradient(to top, #F2C5FE 30%, @color-additional-violet 70%);
+    background: linear-gradient(to top, @color-additional-light-pink 20%, @color-additional-dark-violet 80%);
   }
 }

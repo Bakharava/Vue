@@ -57,6 +57,7 @@
             getSearchNews(searchParams) {
                 EventBus.$emit('getSearchNews', searchParams);
                 this.isActive = '';
+                this.searchParams = '';
             }
         }
     }

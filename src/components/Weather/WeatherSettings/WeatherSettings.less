@@ -1,0 +1,37 @@
+@import "../../../styles/styles";
+
+.weatherSettings {
+  position: absolute;
+  height: @height-sss * 1.5;
+  width: @width-sss;
+  background-color: @color-basic-white;
+  opacity: 0.9;
+  bottom: @base-shift * 39;
+  right: @base-shift * 2;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3px 12px 0 rgba(0,0,0,0.2);
+  .settings-item {
+    display: flex;
+    justify-content: center;
+    flex-basis: 25%;
+   // border-bottom: 1px solid @color-extra-light-grey;
+    cursor: pointer;
+    align-items: center;
+  }
+  .settings-item:hover {
+    background-color: @color-basic-grey;
+  }
+  .itemmorning {
+    background-color: @color-additional-blue;
+    color: @color-additional-light-blue;
+  }
+  .itemafternoon {
+    background-color: @color-basic-raspberry;
+    color: @color-additional-yellow;
+  }
+  .itemnight {
+    background-color: @color-additional-dark-violet;
+    color: @color-additional-light-pink;
+  }
+}

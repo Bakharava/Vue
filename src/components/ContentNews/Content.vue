@@ -6,7 +6,13 @@
                     <div class="content__news-latest-text">Latest posts</div>
                 </div>
                 <div class="content__news-posts" v-if="!loading">
-                    <NewsCard :key="article.id" v-for="article in result" :article="article"/>
+                    <NewsCard :key="article.id" v-for="article in result" >
+                        <a class="newsCard__link" :href="article.url" target="_blank">
+                            <img  class="newsCard__link-img" :src="article.urlToImage ? article.urlToImage : fakeImage" :alt="article.title">
+                            <div class="newsCard__news-title">{{article.title ? article.title : " "}}</div>
+                            <p class="newsCard__news-time">{{article.publishedAt ? article.publishedAt.replace(/[\T\Z]/g, ' ') : " "}}</p>
+                        </a>
+                    </NewsCard>
                 </div>
                 <Loader v-if="loading"/>
                 <Pagination
@@ -45,7 +51,9 @@
                 loading: true,
                 newsUrlParam: 'top-headlines?sources=bbc-news,the-next-web,the-verge',
                 pageNumberParam: 1,
-                pageSize: 20
+                language: 'en',
+                pageSize: 20,
+                fakeImage: '../../assets/image/news.jpg'
             }
         },
         mounted() {
@@ -54,7 +62,7 @@
         created() {
             EventBus.$on('newsUrlChange', (type) => {
                 this.pageNumberParam = 1;
-                this.newsUrlParam = type === 'in world' ? this.newsUrlParam : `top-headlines?category=${type}`;
+                this.newsUrlParam = type === 'in world' ?'top-headlines?sources=bbc-news,the-next-web,the-verge' : `top-headlines?category=${type}`;
                 this.getNews(this.newsUrlParam);
             });
             EventBus.$on('getSearchNews', searchParams => {
@@ -64,7 +72,7 @@
         },
         methods: {
             getNews(param) {
-                const newsUrl = `https://newsapi.org/v2/${param}&language=en&pageSize=${this.pageSize}&page=${this.pageNumberParam}&apiKey=${apiKey}`;
+                const newsUrl = `https://newsapi.org/v2/${param}&language=${this.language}&pageSize=${this.pageSize}&page=${this.pageNumberParam}&apiKey=${apiKey}`;
                 axios.get(newsUrl).then(response => {
                     this.loading = false;
                     this.result = response.data.articles;
