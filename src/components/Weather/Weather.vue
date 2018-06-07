@@ -22,7 +22,8 @@
                 <div  v-bind:class="['settings-item', 'item' + colorThem]"
                      :key="item"
                      v-for="item in settingsItemOptions"
-                     @click="getSettings(item)">
+                     @click="getSettings(item)"
+                     @blur="closeMenu">
                     {{item}}
                 </div>
         </WeatherSettings>
@@ -115,7 +116,10 @@
                } if(item === '5 days') {
                    this.showForecast = !this.showForecast;
                }
-           }
+           },
+            closeMenu() {
+                return this.showWeatherSettings = false;
+            }
         },
         filters: {
             convertFromFarengheit(value) {
