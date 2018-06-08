@@ -123,7 +123,7 @@
         },
         filters: {
             convertFromFarengheit(value) {
-                return (((value)-32)/1.8).toFixed(1)
+                return Math.round(((value)-32)/1.8)
             }
         }
     }

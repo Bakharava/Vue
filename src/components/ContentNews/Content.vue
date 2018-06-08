@@ -38,12 +38,10 @@
     import Weather from "../Weather/Weather";
 
     const apiKey = 'b8d411a4e22745308fab1a665115c094';
-    //let searchNewsParam = '';
 
     export default {
         name: "Content",
         components: {Weather, Pagination, NewsCard, Loader},
-       // props: ['newsTypeParam'],
         data() {
             return {
                 result: [],

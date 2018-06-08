@@ -21,7 +21,10 @@
 <script>
     export default {
         name: "Pagination",
-        props: ['allNewsLength', 'pageSize'],
+        props: {
+            allNewsLength: Number,
+            pageSize: Number
+        },
         data() {
             return {
                 pages: [],
@@ -55,14 +58,14 @@
                 let arr = pages.map(page => {
                     return page - 1
                 });
-                console.log(arr)
+                console.log(arr);
                 return this.pages = arr
             },
             increasePages(pages) {
               let arr =   pages.map(page => {
                     return page + 1
                 });
-                console.log(arr)
+                console.log(arr);
                 return this.pages = arr;
             },
             getPagesAmount(amount) {
