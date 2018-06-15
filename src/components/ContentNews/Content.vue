@@ -6,23 +6,23 @@
                     <div class="content__news-latest-text">Latest posts</div>
                 </div>
                 <div class="content__news-posts" v-if="!loading">
-                    <NewsCard :key="article.id" v-for="article in result" >
+                    <news-card :key="article.id" v-for="article in result" >
                         <a class="newsCard__link" :href="article.url" target="_blank">
                             <img  class="newsCard__link-img" :src="article.urlToImage ? article.urlToImage : fakeImage" :alt="article.title">
                             <div class="newsCard__news-title">{{article.title ? article.title : " "}}</div>
                             <p class="newsCard__news-time">{{article.publishedAt ? article.publishedAt.replace(/[\T\Z]/g, ' ') : " "}}</p>
                         </a>
-                    </NewsCard>
+                    </news-card>
                 </div>
                 <Loader v-if="loading"/>
-                <Pagination
+                <pagination
                         :allNewsLength="allNewsLength"
                         :pageSize="pageSize"
                         @activePageChanged="changePage"/>
             </div>
             <div class="content__additional">
                 <div class="weather-widget">
-                    <Weather />
+                    <weather />
                 </div>
             </div>
         </div>
